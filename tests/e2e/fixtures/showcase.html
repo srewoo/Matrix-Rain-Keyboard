@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Notes</title>
+<style>
+  :root { --bg: #f6f7f9; --card: #fff; --ink: #1d232b; --muted: #6a7480; --line: #e2e6ea; }
+  .dark { --bg: #14171c; --card: #1d2228; --ink: #e6e9ed; --muted: #8b95a1; --line: #2b323a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.5 -apple-system, system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+  header { display: flex; align-items: center; gap: 12px; padding: 18px 48px; border-bottom: 1px solid var(--line); background: var(--card); }
+  header b { font-size: 18px; }
+  header span { color: var(--muted); font-size: 14px; }
+  main { display: grid; grid-template-columns: 240px 1fr; gap: 32px; padding: 32px 48px; }
+  aside div { padding: 10px 12px; border-radius: 8px; color: var(--muted); margin-bottom: 4px; }
+  aside div.on { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; }
+  input, textarea { width: 100%; border: 0; outline: 0; background: transparent; color: var(--ink); font: inherit; }
+  input { font-size: 26px; font-weight: 600; margin-bottom: 12px; }
+  textarea { height: 420px; resize: none; font-size: 17px; line-height: 1.7; }
+</style>
+<header><b>Notes</b><span>All changes saved</span></header>
+<main>
+  <aside><div class="on">Today</div><div>Ideas</div><div>Reading list</div><div>Archive</div></aside>
+  <section>
+    <input id="title" value="Friday plan" />
+    <textarea id="body"></textarea>
+  </section>
+</main>
+<script>if (location.search.includes("dark")) document.documentElement.className = "dark";</script>

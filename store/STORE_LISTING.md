@@ -1,50 +1,74 @@
-# Chrome Web Store Listing — Matrix Rain Keyboard
+# Chrome Web Store Listing — Digital Rain Keyboard
 
-Copy these fields into the Web Store Developer Dashboard when publishing.
+Copy these fields into the Developer Dashboard. Assets live in `assets/store/`.
 
 ## Name
-Matrix Rain Keyboard
+Digital Rain Keyboard
 
 ## Summary (≤132 chars)
-Turn any page into the Matrix. Every keystroke spawns green digital rain cascading down your screen. Pure fun.
+Falling-code digital rain that follows your typing. Six themes, adjustable speed and density, and per-site control.
 
 ## Category
-Fun  (Suggested) — alt: Entertainment
+Fun (alt: Entertainment)
 
 ## Language
 English
 
 ## Detailed description
-Ever wanted to feel like you're inside the Matrix? Now every key you press
-makes the screen come alive.
+Turn your typing into a cascade of falling code.
 
-Matrix Rain Keyboard overlays a full-screen "digital rain" on top of any web
-page. The moment you start typing, streaks of glowing green characters cascade
-down the screen — bright leading glyph, fading trail, the classic look.
+Digital Rain Keyboard draws glowing streams of characters over any web page as
+you type. The letter you press falls from your cursor, more streams fill the
+screen with every keystroke, and pressing Enter sends a wave across the page.
+When you stop typing, the rain fades away and the page is back to normal.
 
 FEATURES
-• One-click ENABLE / DISABLE from the toolbar popup
-• Triggered by your keystrokes — type to make it rain
-• Click-through overlay: the page underneath stays fully usable
-• Remembers your last on/off state
-• Zero tracking, zero network calls, no data collection
+• Rain follows your cursor; the letters you type lead the streams
+• Press Enter to send a wave across the whole screen
+• Six colour themes: classic green, amber, ice cyan, crimson, violet, rainbow
+• Adjust density, speed, glyph size and page dimming — from fully transparent to solid black
+• Turn it off for any site (covers its subdomains too)
+• Works in embedded editors and fullscreen pages
+• Click-through overlay: the page stays readable and fully usable
+• Respects your system's reduced-motion setting; uses no CPU while idle
+• Password and payment fields never show what you type
 
 HOW TO USE
-1. Click the extension icon and hit ENABLE.
-2. Click anywhere on the page and start typing.
-3. Watch the green rain roll. Hit DISABLE when you're done.
+1. Click the toolbar icon and press ENABLE.
+2. Type anywhere on a page.
+3. Open the popup again to change the theme or turn it off for a site.
 
-Note: Chrome blocks extensions from running on internal pages like
-chrome:// and the Web Store, so the effect won't appear there.
+Chrome doesn't allow extensions on internal pages (chrome://, the Web Store),
+so the effect won't appear there.
 
-Made for fun. Wake up, Neo.
+PRIVACY
+No data collection, no network requests, no tracking. Your settings are stored
+only in your browser.
 
-## Permissions justification
-- activeTab / scripting: inject the rain overlay into the page you're viewing.
-- storage: remember whether the effect is enabled.
-- host permissions (<all_urls>): the effect is meant to work on any site you visit.
-No data is collected, stored remotely, or transmitted.
+## Single purpose (required)
+Display a decorative falling-code animation over the current web page in
+response to the user's typing.
 
-## Single purpose (required statement)
-This extension has a single purpose: display a decorative Matrix-style
-"digital rain" animation over the current web page in response to keystrokes.
+## Permission justifications
+- **storage**: saves your display settings (on/off, theme, speed, density,
+  per-site list) locally in your browser.
+- **Host access (`<all_urls>`, content script)**: the animation is drawn on
+  whatever page you're typing on, including embedded frames such as rich text
+  editors. The script only listens for key presses to start the animation; it
+  does not read page content.
+
+## Remote code
+No. All code is packaged in the extension.
+
+## Data usage (privacy practices tab)
+- Collected data: **none**. Tick nothing in the data-type list.
+- Certify: not sold to third parties; not used for unrelated purposes; not used
+  for creditworthiness or lending.
+
+## Assets
+| Field | File |
+|---|---|
+| Store icon (128×128, 96px art) | `assets/store/store_icon_128.png` |
+| Screenshots (1280×800) | `assets/store/screenshot_{1,2,3}_1280x800.png` |
+| Small promo tile (440×280) | `assets/store/promo_small_440x280.png` |
+| Marquee promo tile (1400×560) | `assets/store/promo_marquee_1400x560.png` |

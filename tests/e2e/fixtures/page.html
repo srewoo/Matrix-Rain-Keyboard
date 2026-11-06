@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Digital Rain fixture</title>
+<style>
+  body { font: 16px system-ui; margin: 40px; max-width: 760px; }
+  textarea, input { width: 100%; font: 16px system-ui; padding: 8px; margin: 8px 0; box-sizing: border-box; }
+  iframe { width: 100%; height: 80px; border: 1px solid #ccc; }
+  #stage { padding: 20px; background: #eef; }
+</style>
+<h1>Fixture</h1>
+<label>Message <textarea id="msg" rows="3"></textarea></label>
+<label>Password <input id="pw" type="password" /></label>
+<iframe id="frame" title="cross-origin editor"></iframe>
+<div id="stage"><button id="fs">Go fullscreen</button></div>
+<script>
+  // Cross-origin child: same server, other hostname.
+  document.getElementById("frame").src = `http://localhost:${location.port}/frame.html`;
+  document.getElementById("fs").onclick = () => document.getElementById("stage").requestFullscreen();
+</script>
