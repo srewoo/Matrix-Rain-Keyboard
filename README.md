@@ -1,30 +1,69 @@
-# Matrix Rain Keyboard 🟢
+# Digital Rain Keyboard
 
-A fun Chrome extension that turns any web page into a full-screen Matrix
-"digital rain". Every key you press spawns fresh green characters cascading
-down the screen.
+Chrome extension: falling-code "digital rain" that follows your typing. Rain fills the screen as
+you type, the letters you type fall from your cursor, and **Enter** sends a
+wave across the screen.
 
 ## Install (Load Unpacked)
 
-1. Open Chrome and go to `chrome://extensions`
-2. Toggle **Developer mode** ON (top-right)
-3. Click **Load unpacked**
-4. Select this folder: `matrix/`
-5. Pin the extension and click its icon → **ENABLE**
+1. `npm install && npm run build`
+2. `chrome://extensions` → **Developer mode** ON → **Load unpacked** → pick `dist/extension/`.
+3. Pin the extension, click it, hit **ENABLE**, then type on any page.
+   (Tabs opened before installing need one reload.)
 
-## Use
+## Settings (toolbar popup)
 
-- Click the toolbar icon and hit **ENABLE**.
-- Click anywhere on the page and **start typing** — each keystroke feeds the rain.
-- Click the icon again → **DISABLE** to stop.
+| Setting | Range |
+|---|---|
+| Theme | Classic green, Amber, Ice cyan, Crimson, Violet, Rainbow |
+| Density | 1–8 streaks per keystroke |
+| Speed | 0.5×–3× |
+| Glyph size | 12–32 px |
+| Page dimming | 0% (transparent) to 100% (solid black); fades in only while rain is falling |
+| Show typed characters | on/off |
+| Enter key bursts the screen | on/off |
+| Run on *this site* | untick to turn it off for that site and its subdomains |
 
-State is remembered per session via `chrome.storage`.
+Changes apply live to every open tab.
 
-## Notes
+## Privacy & behaviour
 
-- The overlay is click-through (`pointer-events: none`), so the page stays usable.
-- It can't run on restricted pages like `chrome://` or the Web Store.
-- Files: `manifest.json`, `content.js` (effect), `popup.html/js` (toggle), `icon{16,48,128}.png`.
-- Store assets + listing/privacy docs live in `assets/` and `store/`.
-- Regenerate all art any time: `python3 assets/generate_assets.py`.
-- Web Store upload package: `matrix-rain-keyboard-v1.0.0.zip`.
+- Typed characters are drawn **only** in the moment and never stored or sent.
+  Password, one-time-code and credit-card fields never show typed characters.
+- No network requests. Only permission: `storage`.
+- Respects `prefers-reduced-motion` (1 streak per key, half speed, smaller bursts).
+- The animation loop stops once the screen is clear — zero CPU while idle.
+- The overlay is click-through and DPI-aware.
+- Works when typing in embedded editors (iframes): child frames tell the top
+  page *that* a key was pressed, never *which* key, via the background worker.
+- Fullscreen pages keep the overlay (except a natively fullscreened `<video>`).
+
+## Development
+
+| Command | What it does |
+|---|---|
+| `npm test` | Unit tests (simulation + settings validation), no browser |
+| `npm run build` | Validates the manifest and code, writes `dist/extension/` and the store zip |
+| `npm run test:e2e` | Builds, then loads the real extension in Chromium and tests it |
+| `npm run test:all` | Both test suites |
+| `npm run assets` | Regenerates icons and promo tiles (Pillow + macOS Hiragino font) |
+| `npm run screenshots` | Captures store screenshots from the real extension |
+| `npm run release` | All tests, build, screenshots — then follow `store/SUBMISSION_CHECKLIST.md` |
+| `npm version patch` | Bumps the version in `package.json` and `manifest.json` together |
+
+Requirements: Node 20+, `zip` on PATH. First e2e run: `npx playwright install chromium`.
+
+## Files
+
+| File | Role |
+|---|---|
+| `manifest.json` | MV3 manifest |
+| `config.js` | Themes, limits, defaults, sim tuning, settings validation, site rules |
+| `rain.js` | Pure rain simulation (no DOM) |
+| `content.js` | Overlay, keyboard input, frame relay, storage sync |
+| `background.js` | Relays key presses from embedded frames to the top frame |
+| `popup.html/js` | Settings UI |
+| `scripts/` | Build, version sync, screenshot capture |
+| `tests/unit/`, `tests/e2e/` | Node unit tests; Playwright e2e tests |
+| `assets/` | Art generator and store images |
+| `store/` | Listing text, privacy policy, submission checklist |

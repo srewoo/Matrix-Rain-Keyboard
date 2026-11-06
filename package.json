@@ -1,0 +1,23 @@
+{
+  "name": "digital-rain-keyboard",
+  "version": "2.0.1",
+  "private": true,
+  "description": "Chrome extension: falling-code digital rain that follows your typing.",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/unit/*.test.js",
+    "build": "node scripts/build.mjs",
+    "test:e2e": "npm run build && playwright test",
+    "test:all": "npm test && npm run test:e2e",
+    "assets": "python3 assets/generate_assets.py",
+    "screenshots": "npm run build && node scripts/screenshots.mjs",
+    "release": "npm run test:all && npm run screenshots",
+    "version": "node scripts/sync-version.mjs && git add manifest.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1"
+  }
+}
